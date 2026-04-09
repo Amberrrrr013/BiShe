@@ -288,3 +288,97 @@ API_CONFIG = {
 ## 许可证
 
 MIT License
+
+---
+
+## 参考论文 / 资料
+
+### 英语多模态教学相关
+
+- [The Future of AI in Teleprompters: Enhancing Public Speaking and Broadcasting](https://www.pitchhub.com/post/the-future-of-ai-in-teleprompters-enhancing-public-speaking-and-broadcasting)
+- [基于多模态学习的英语听说教学研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS7e0LbIUB_2E1mXPQ0OyWHwQWJhSFTG_ZVjpEriCNO1sOAWjDUASVHMnuSxwFkxBRJwxvHMoF8zdkjp93rikTVjxCTeOewax8DDu03AxmN95kX1ktH0AH0JUHYW_sewBAiMohTYu5hGNt3kd6dOUkDfW4KrtxHeM2cIRqC_EP2R8A==&uniplatform=NZKPT&language=CHS)
+- [多模态视角下的英语教学模式创新研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS6nd0QR23ycusCiE587Ljt0KPmK9Qi6ulLZqn78FKjPF8vQLWYwrvvFFyGWvRKKRsmlr4NCfsQpFhOyUNtmeiBoELTrV5PsLWo-83-hMd9r8IXabOKjygZnPPFMsRYQxQT3yU1MVfUtsz7_j6ylwJLE-iE9PAGWFQGljJys8t36ig==&uniplatform=NZKPT&language=CHS)
+- [人工智能赋能英语教学创新研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS7Q4Xo8q9SGEb18UzLRajQNOhUfH30hkJcSw7TXzI7T7gsf3FUVXZnKMoz1i4B-ltz2O05Aw4G5l9rdvsWRSt5VzUJtkR3Z-OaHW-82Lq9poRrMfbzvdiwW0Qwa55DBaHvLUMgPbGf0Gp0jmYh-JUydVZ16lfembbx-0gnSUxWuqA==&uniplatform=NZKPT&language=CHS)
+- [人工智能在英语教育中的应用研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS58Rzk9xzRsWXbnkxV4i5DRKrtSHJqTRm6riZuWkgvDqP34UxGn0KB_4NNe0KVTgL86ZuXcmG5n9HGqcjkZBkJzi9EWgJogy1gGT6rsn_EIeMFUJbSuAt6xkdbMgA0iyyNry9zHv8gSuL4tr0xU2R0NGNXNq3HGNJLeSbjU84goRqsnAwHVHbWH&uniplatform=NZKPT&language=CHS)
+- [面向英语教学的AI多模态交互系统设计](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0YPpvD98iQoJ-cUMuIwhpVIhGcM_pVrL4LAKRgYR07tlWG6MVGQgpm01Ow5r5_-lsHarHIaBG0msop2mnwy6F8svdzVA3jKUnKIs2eo_c-FgsPD_xJ9-VgwqEQ834bkWmshwy9LJgSVVFwMkZfTtIj0P0NiJbUzNLFppN_pWfMbCQ==&uniplatform=NZKPT&language=CHS)
+- [智能语音技术在英语口语教学中的应用](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0b_pwlaRYpH8nrM-YMZG5AiAwYM64FwngsSLV0warSjx3KaVd2j8tgTJ4Vodwyy18hR9lL6LNLfoupKpHToqCU4VX0CRsZaYpotLciYpQ6f23gFBQniFaTm3rRgKb__gmFIqagspmZ7jckDR24z44CmB-3mWsHZDTRAegCwQpJQoQ==&uniplatform=NZKPT&language=CHS)
+- [基于深度学习的英语语音识别与教学研究](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0bB1q0vGtKcLAdhqf3G30MyNEv5TcA5fXR260NqO4AjUnFciuLFTJJrKU-r3AmEVaxys8JLhB64K6lrtnOVedC912KkiwXn044UguimovDDOpRVaiMHDtXuCTc814QsiBR-P58nhJL4gg5PzEjbHYwf83QUh2HxT2hL1j44w8Uemg==&uniplatform=NZKPT&language=CHS)
+- [大语言模型在英语教学中的应用探索](https://kns.cnki.net/kcms2/article/abstract?v=YFFVSRMG_GF45xRT1EoH-dYRO0C0e-ibyb-Xasi1zXDWvfzaNAGUeld4-Pu8kQaEYnde_mKtYSkQ8HCdhiM-LOFu4z7ZPxFZ64WzAxvkPYwZGTBslBwrWWR4MJN9m6YQYXKGJEBctANGqQQxLNW-2jhAg3xq7zGFDJR9Q_xLk-sUJBZlwXq027ocQtghgSgc&uniplatform=NZKPT)
+- [AI-Enhanced Pronunciation Training: Systematic Review](https://www.sciencedirect.com/science/article/abs/pii/S0885230825001147)
+- [Multimodal Learning for English Speaking Practice](https://dl.acm.org/doi/10.1145/3482632.3483130)
+- [Speech Technology for Language Learning: A Systematic Review](https://www.sciencedirect.com/science/article/pii/S0023969025001183)
+- [AI in Education: English Language Teaching 4.0](https://bera-journals.onlinelibrary.wiley.com/doi/full/10.1111/bjet.13460)
+- [人工智能支持下的英语多模态教学研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji05HqjAbosqEKy7SlpCeTpSCCSgPBU1Qz5OjToYf4fJR-LW8vV4Q1B2SIVjS2TfXP_LfCm_VYp9A8BlKwjSFqScPY1wuv3BEROxVKOZFDktjg0yvIdE0MwAMOCttVx9_rVUbFU3bJo3HFuqfcdCTMRpXK4X130oygFtS2-rZjd22Yw==&uniplatform=NZKPT&language=CHS)
+- [基于深度学习的多模态英语教学系统研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji047tkNecrCsfJErLf_nhRy3Aev7bpkyF3FSG2Pl2sXjNzFqN0pcF0b-IYGlyvi-JuLpBDL_dkb8Sns1aXECUMvO7jzuLXFny2qdWE1qAB5O_BbdDWMJJUVuTH0dEawYO1yj94h7TKeuIMmJ-kKmtpfy6ga_1PjhDXoLnAqXFLtAFw==&uniplatform=NZKPT&language=CHS)
+- [智能语音交互在英语口语教学中的应用研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji05nCwKdLaP8hZaZSt-8ydbvxBzPPiK830nqOqfzukTetf9AxoJFUYJoCJb_xL0M_Fz7JROIi6iVMb11URrPeY4ebSHfsJBEZ3eGL4ECqAHt5QORGOQJ9vo_DhiEK2UXIsTS-A4PpMJMCQmshx8XQPsW6G02aAYCMzalkeKl58Aj8CoPQOHmeq7a&uniplatform=NZKPT&language=CHS)
+- [多模态AI技术在英语听说教学中的应用与实践](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji07W7G23cnb6XvijekQ1B3xutaXlzgBibovch_Ulgxi7GGYnacve4YcvrUBKaHK8khf-UKcVbjsnFvG5b_YwWeshzkexxUyiHhTswvSgAKKaafYLu0qpSiDt6NXT05rEIzfYRgjjctxDEFl_XVxsAmIFnisoRfn2DjBWOcQMDrGVhQ==&uniplatform=NZKPT&language=CHS)
+
+### Agent系统搭建相关
+
+- [LangGraph Documentation](https://blog.csdn.net/qq_42956179/article/details/143116547)
+- [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2204.07851)
+- [AutoGen: Enabling Next-Gen AI Applications](https://www.sciencedirect.com/science/article/pii/S2949882125000015)
+- [AgentVerse: Enhancing Multi-Agent Cooperation](https://dl.acm.org/doi/10.1145/3593013.3594011)
+- [CAMEL: Communicative Agents Framework](https://dl.acm.org/doi/10.1145/3397481.3450648)
+- [Role-Playing with Language Models](https://dl.acm.org/doi/10.1145/3726302.3730136)
+- [Multi-Agent Collaboration in LangGraph](https://dl.acm.org/doi/10.1145/3715275.3732018)
+- [Conversational AI with Multi-Agent Systems](https://dl.acm.org/doi/10.1145/3745238.3745531)
+- [Building Effective AI Agents: A Survey](https://dl.acm.org/doi/10.1145/3711828)
+- [OpenAI Agents SDK](https://dl.acm.org/doi/10.1145/3593013.3594011)
+- [Agent-Oriented Workflow Automation](https://dl.acm.org/doi/10.1145/3746027.3755423)
+- [LLM-based Autonomous Agents: A Survey](https://dl.acm.org/doi/10.1145/3721488.3721749)
+- [Coze Agent Platform Documentation](https://www.coze.cn/open/docs/guides)
+- [Coze Studio GitHub](https://github.com/coze-dev/coze-studio/blob/main/README.zh_CN.md)
+- [Fay: Open-source Digital Human Agent](https://github.com/xszyou/Fay)
+- [EMO: Emote Portrait Alive - Audio-Driven Video Generation](https://github.com/HumanAIGC/EMO)
+- [Reasoning with Large Language Models](https://arxiv.org/abs/2602.11790)
+- [Tool Learning with Language Models](https://arxiv.org/abs/2603.28088)
+- [Multimodal Large Language Models](https://arxiv.org/abs/2601.18543)
+- [Vision-Language Models for Robotics](https://arxiv.org/abs/2603.29620)
+- [Large Language Model Agents: A Survey](https://arxiv.org/abs/2603.02697)
+- [Understanding AI Agent Systems](https://arxiv.org/abs/2511.04570)
+- [LLM Agents: Theory and Practice](https://arxiv.org/abs/2307.09368)
+
+### 其他相关
+
+- **语音识别 (ASR)**
+  - [Whisper: OpenAI Speech Recognition](https://openai.com/index/whisper/)
+  - [Whisper GitHub](https://github.com/openai/whisper)
+  - [Whisper Paper](https://cdn.openai.com/papers/whisper.pdf)
+  - [faster-whisper PyPI](https://pypi.org/project/faster-whisper/)
+  - [Vosk Speech Recognition](https://alphacephei.com/vosk/models)
+  - [Vosk API GitHub](https://github.com/alphacep/vosk-api)
+  - [NVIDIA ASR Technology Guide](https://developer.nvidia.com/blog/essential-guide-to-automatic-speech-recognition-technology/)
+
+- **唇形同步与说话人头像 (Talking Head)**
+  - [SadTalker: Talking Head Generation](https://arxiv.org/abs/2210.15741)
+  - [Wav2Lip: Lip Sync from Audio](https://github.com/jiwoo-jeong/wav2lip)
+  - [Awesome Talking Head Synthesis](https://github.com/Kedreamix/Awesome-Talking-Head-Synthesis)
+  - [MuseV: Virtual Human Video Generation](https://github.com/TMElyralab/MuseV)
+  - [MuseTalk: Real-Time Talking Head](https://github.com/TMElyralab/MuseTalk)
+  - [MusePose: Pose-Driven Video Generation](https://github.com/TMElyralab/MusePose)
+  - [VASA-1: Microsoft's Visual-Audio Synthesis](https://www.microsoft.com/en-us/research/project/vasa-1/)
+  - [EMO: Emote Portrait Alive 2](https://humanaigc.github.io/emote-portrait-alive-2/)
+  - [HiAR: Human Interactive Animation](https://jacky-hate.github.io/HiAR/)
+  - [Wan Video: AI Video Creation](https://create.wan.video/explore)
+
+- **视频生成 (Video Generation)**
+  - [LTX-Video: Transformer-based Video Model](https://huggingface.co/Lightricks/LTX-Video-ICLoRA-canny-13b-0.9.7)
+  - [Spatial Audio Rendering for Speech Translation](https://www.microsoft.com/en-us/research/video/spatial-audio-rendering-for-speech-live-translation/)
+  - [Terminal Bench Environment](https://github.com/ucsb-mlsec/terminal-bench-env)
+
+- **技术教程与资源**
+  - [知乎: 数字人多模态技术综述](https://zhuanlan.zhihu.com/p/670962982)
+  - [知乎: 多模态AI数字人专题](https://zhuanlan.zhihu.com/c_1717215615826153474)
+  - [知乎: AI数字人技术发展](https://zhuanlan.zhihu.com/p/1958858515323007594)
+  - [腾讯云: AI数字人开发指南](https://cloud.tencent.com/developer/article/2589878)
+  - [阿里云: 数字人技术解析](https://www.aliyun.com/sswb/1192813.html)
+  - [腾讯云: 多模态技术应用](https://cloud.tencent.com/developer/article/2629105)
+  - [Bilibili: AI技术解读](https://www.bilibili.com/opus/1165340570090995712)
+  - [AutoDL平台](https://www.autodl.com/home)
+  - [天池数据集: 语音数据](https://tianchi.aliyun.com/dataset/88096)
+  - [天池数据集: 视频数据](https://tianchi.aliyun.com/dataset/90386)
+
+- **开源项目**
+  - [MOVA: Multimodal Open Vision Architecture](https://github.com/OpenMOSS/MOVA)
+  - [aimh8 Digital Human](https://github.com/lakysir/aimh8_digital_human)
