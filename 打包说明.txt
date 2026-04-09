@@ -1,0 +1,42 @@
+==============================================
+打包说明 - AI 英语演讲视频生成系统
+==============================================
+
+一、打包前准备
+--------------
+1. 确保已安装PyInstaller:
+   pip install pyinstaller
+
+2. 确保测试资源文件存在:
+   - test_resourse/text_test.txt
+   - test_resourse/picture_test.jpg
+   - test_resourse/speech_test.wav
+
+二、打包命令
+--------------
+在 demo_1 文件夹下运行:
+
+pyinstaller --onefile --windowed --name "AI演讲视频生成系统" gui_app.py
+
+参数说明:
+- --onefile: 打包成单个exe文件
+- --windowed: 无控制台窗口(纯图形界面)
+- --name: 生成的exe文件名
+
+三、打包后
+----------
+打包完成后，exe文件位于:
+dist\AI演讲视频生成系统.exe
+
+四、运行
+--------
+1. 直接双击 dist\AI演讲视频生成系统.exe 即可运行
+
+2. 或者直接运行 start.bat (需要Python环境)
+
+五、注意事项
+------------
+1. 打包前确保所有模型路径正确
+2. 如果使用 --windowed 参数，运行时不会显示黑色控制台窗口
+3. 打包后的exe文件可以在其他电脑上运行（需要有NVIDIA显卡和CUDA环境）
+4. 建议首次使用先用 start.bat 测试，确认功能正常后再打包

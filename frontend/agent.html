@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent - 全自动英语演讲视频生成</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #00d9ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 85%;
+            clear: both;
+        }
+        
+        .chat-message.user {
+            background: rgba(0,217,255,0.2);
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .chat-message.assistant {
+            background: rgba(0,255,136,0.1);
+            margin-right: auto;
+        }
+        
+        .chat-message .role {
+            color: #00d9ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .chat-message.assistant .role {
+            color: #00ff88;
+        }
+        
+        .chat-message .content {
+            color: #fff;
+            line-height: 1.5;
+        }
+        
+        .chat-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1em;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            color: #1a1a2e;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,217,255,0.4);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .config-display {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .config-item:last-child {
+            border-bottom: none;
+        }
+        
+        .config-label {
+            color: #888;
+        }
+        
+        .config-value {
+            color: #00d9ff;
+            font-weight: 500;
+        }
+        
+        .progress-section {
+            margin-top: 20px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .progress-item.completed {
+            background: rgba(0,255,136,0.1);
+            border-left: 3px solid #00ff88;
+        }
+        
+        .progress-item.processing {
+            background: rgba(0,217,255,0.2);
+            border-left: 3px solid #00d9ff;
+        }
+        
+        .progress-item.pending {
+            opacity: 0.5;
+        }
+        
+        .skill-log {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+        
+        .skill-log-item {
+            padding: 5px 0;
+            color: #888;
+        }
+        
+        .skill-log-item .tool {
+            color: #00ff88;
+        }
+        
+        .skill-log-item .result {
+            color: #00d9ff;
+        }
+        
+        .result-preview {
+            margin-top: 20px;
+        }
+        
+        .result-preview video {
+            width: 100%;
+            border-radius: 8px;
+            background: #000;
+        }
+        
+        .result-preview audio {
+            width: 100%;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,217,255,0.3);
+            border-radius: 50%;
+            border-top-color: #00d9ff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .quick-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action {
+            padding: 8px 16px;
+            background: rgba(0,217,255,0.2);
+            border: 1px solid rgba(0,217,255,0.3);
+            border-radius: 20px;
+            color: #00d9ff;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-action:hover {
+            background: rgba(0,217,255,0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Agent 全自动视频生成</h1>
+            <p>通过自然语言对话，自动完成从文本生成到视频制作的全流程</p>
+        </header>
+        
+        <div class="main-layout">
+            <div class="left-column">
+                <div class="panel">
+                    <div class="panel-title">
+                        <span>💬</span>
+                        与AI Agent对话
+                    </div>
+                    
+                    <div class="chat-container" id="chatContainer">
+                        <div class="chat-message assistant">
+                            <div class="role">AI Agent</div>
+                            <div class="content">
+                                👋 你好！我是AI Agent，可以帮助你全自动生成英语演讲视频。<br><br>
+                                请告诉我你想要什么样的视频，例如：<br>
+                                • "帮我制作一个关于环保的英语演讲视频"<br>
+                                • "我想生成10个气候变化主题的视频"<br>
+                                • "制作一个大学四六级水平的商业演讲视频"<br><br>
+                                或者，你可以点击下方快捷按钮开始：
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="quick-action" onclick="quickAction('single')">📹 单个视频</button>
+                        <button class="quick-action" onclick="quickAction('batch')">📦 批量视频</button>
+                        <button class="quick-action" onclick="quickAction('random')">🎲 随机主题</button>
+                    </div>
+                    
+                    <div class="chat-input-group" style="margin-top: 15px;">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="输入您的需求...">
+                        <button class="btn btn-primary" id="sendBtn" onclick="sendMessage()">发送</button>
+                    </div>
+                    
+                    <div style="margin-top: 10px;">
+                        <button class="btn btn-secondary" onclick="clearChat()" style="font-size: 0.9em; padding: 8px 16px;">
+                            🗑️ 清空对话
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="panel" id="progressPanel" style="display: none; margin-top: 20px;">
+                    <div class="panel-title">
+                        <span>📊</span>
+                        生成进度
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-item pending" id="progress_1">
+                            <span>📝 步骤1: 生成文本</span>
+                        </div>
+                        <div class="progress-item pending" id="progress_2">
+                            <span>🖼️ 步骤2: 选择头像</span>
+                        </div>
+                        <div class="progress-item pending" id="progress_3">
+                            <span>🎙️ 步骤3: 语音合成</span>
+                        </div>
+                        <div class="progress-item pending" id="progress_4">
+                            <span>🎬 步骤4: 生成视频</span>
+                        </div>
+                        <div class="progress-item pending" id="progress_5">
+                            <span>✨ 步骤5: 质量评估</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-log" id="skillLog" style="display: none;">
+                        <div style="color: #00d9ff; margin-bottom: 10px;">📋 执行日志:</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-column">
+                <div class="panel" id="configPanel" style="display: none;">
+                    <div class="panel-title">
+                        <span>⚙️</span>
+                        提取的配置参数
+                    </div>
+                    
+                    <div class="config-display" id="configDisplay">
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-primary" id="executeBtn" onclick="executeGeneration()" style="width: 100%;">
+                            🚀 确认并开始生成
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="panel" id="resultPanel" style="display: none; margin-top: 20px;">
+                    <div class="panel-title">
+                        <span>🎬</span>
+                        生成结果
+                    </div>
+                    
+                    <div class="result-preview" id="resultPreview">
+                    </div>
+                    
+                    <div style="margin-top: 15px; display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" onclick="openResult()" style="flex: 1;">
+                            📂 打开文件夹
+                        </button>
+                        <button class="btn btn-secondary" onclick="startNew()" style="flex: 1;">
+                            ✨ 开始新任务
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const configPanel = document.getElementById('configPanel');
+        const configDisplay = document.getElementById('configDisplay');
+        const progressPanel = document.getElementById('progressPanel');
+        const resultPanel = document.getElementById('resultPanel');
+        const skillLog = document.getElementById('skillLog');
+        
+        let conversationHistory = [];
+        let currentConfig = null;
+        let currentResult = null;
+        
+        const difficultyMap = {
+            'elementary': '小学水平',
+            'middle_school': '初中水平',
+            'high_school': '高中水平',
+            'college_cet': '大学四六级',
+            'english_major': '英语专业',
+            'native': '母语级'
+        };
+        
+        const styleMap = {
+            'informative': '信息型',
+            'motivational': '激励型',
+            'persuasive': '说服型',
+            'entertaining': '娱乐型',
+            'ceremonial': '仪式型',
+            'keynote': '主题型',
+            'demonstration': '展示型',
+            'tributary': '致敬型',
+            'controversial': '争议型',
+            'storytelling': '故事型'
+        };
+        
+        function addMessage(role, content) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `chat-message ${role}`;
+            msgDiv.innerHTML = `
+                <div class="role">${role === 'user' ? '你' : 'AI Agent'}</div>
+                <div class="content">${content.replace(/\n/g, '<br>')}</div>
+            `;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            conversationHistory.push({ role, content });
+        }
+        
+        function showLoading(message = '思考中...') {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading';
+            loadingDiv.className = 'chat-message assistant';
+            loadingDiv.innerHTML = `
+                <div class="role">AI Agent</div>
+                <div class="content">
+                    <div class="loading"></div>
+                    <div style="margin-top: 10px;">${message}</div>
+                </div>
+            `;
+            chatContainer.appendChild(loadingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            if (loading) loading.remove();
+        }
+        
+        function showConfig(config) {
+            currentConfig = config;
+            configPanel.style.display = 'block';
+            
+            configDisplay.innerHTML = `
+                <div class="config-item">
+                    <span class="config-label">📌 主题</span>
+                    <span class="config-value">${config.topic || '未指定'}</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">📏 字数</span>
+                    <span class="config-value">${config.length || 300} 词</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">🎓 难度</span>
+                    <span class="config-value">${difficultyMap[config.difficulty] || config.difficulty || '未指定'}</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">🎭 风格</span>
+                    <span class="config-value">${styleMap[config.style] || config.style || '未指定'}</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">👤 主播性别</span>
+                    <span class="config-value">${config.image_gender === 'female' ? '女性' : config.image_gender === 'male' ? '男性' : '随机'}</span>
+                </div>
+                <div class="config-item">
+                    <span class="config-label">🎬 生成数量</span>
+                    <span class="config-value">${config.student_count || 1} 个</span>
+                </div>
+            `;
+            
+            configPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function showProgress(step, status) {
+            progressPanel.style.display = 'block';
+            const progressItem = document.getElementById(`progress_${step}`);
+            if (progressItem) {
+                progressItem.className = `progress-item ${status}`;
+                if (status === 'completed') {
+                    progressItem.innerHTML = progressItem.innerHTML.replace('⏳', '✅').replace('🔄', '✅');
+                } else if (status === 'processing') {
+                    progressItem.innerHTML = progressItem.innerHTML.replace('⏳', '🔄').replace('✅', '🔄');
+                }
+            }
+        }
+        
+        function addSkillLog(tool, result) {
+            skillLog.style.display = 'block';
+            const logItem = document.createElement('div');
+            logItem.className = 'skill-log-item';
+            logItem.innerHTML = `
+                <span class="tool">调用: ${tool}</span>
+                <br>
+                <span class="result">结果: ${result.substring(0, 100)}${result.length > 100 ? '...' : ''}</span>
+            `;
+            skillLog.appendChild(logItem);
+        }
+        
+        function showResult(result) {
+            currentResult = result;
+            resultPanel.style.display = 'block';
+            
+            const previewDiv = document.getElementById('resultPreview');
+            
+            if (result.video_path) {
+                const videoUrl = `/files/${result.video_path.split('output/')[1]?.replace(/\\/g, '/')}`;
+                previewDiv.innerHTML = `
+                    <video src="${videoUrl}" controls style="width: 100%; border-radius: 8px; background: #000;"></video>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,255,136,0.1); border-radius: 6px;">
+                        <div style="color: #00ff88; font-weight: bold;">✅ 生成完成！</div>
+                        <div style="color: #888; font-size: 0.9em; margin-top: 5px;">质量评分: ${result.quality_score || 'N/A'}/100</div>
+                    </div>
+                `;
+            } else if (result.audio_path) {
+                const audioUrl = `/files/${result.audio_path.split('output/')[1]?.replace(/\\/g, '/')}`;
+                previewDiv.innerHTML = `
+                    <audio src="${audioUrl}" controls style="width: 100%;"></audio>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(0,255,136,0.1); border-radius: 6px;">
+                        <div style="color: #00ff88; font-weight: bold;">✅ 音频生成完成！</div>
+                    </div>
+                `;
+            }
+            
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        async function sendMessage(message = null) {
+            const msg = message || chatInput.value.trim();
+            if (!msg) return;
+            
+            chatInput.value = '';
+            addMessage('user', msg);
+            showLoading();
+            
+            try {
+                const response = await fetch('/api/agent/fullauto', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: msg,
+                        history: conversationHistory.slice(-10),
+                        auto_execute: false
+                    })
+                });
+                
+                const result = await response.json();
+                hideLoading();
+                
+                if (result.success) {
+                    addMessage('assistant', result.response);
+                    
+                    if (result.config) {
+                        showConfig(result.config);
+                    }
+                    
+                    if (result.execution_history && result.execution_history.length > 0) {
+                        for (const item of result.execution_history) {
+                            addSkillLog(item.tool, item.result);
+                        }
+                    }
+                } else {
+                    addMessage('assistant', '❌ 发生错误: ' + result.error);
+                }
+            } catch (err) {
+                hideLoading();
+                addMessage('assistant', '❌ 网络错误，请稍后重试');
+            }
+        }
+        
+        async function executeGeneration() {
+            if (!currentConfig) {
+                alert('请先通过对话提取配置参数');
+                return;
+            }
+            
+            sendBtn.disabled = true;
+            document.getElementById('executeBtn').disabled = true;
+            
+            progressPanel.style.display = 'block';
+            configPanel.style.display = 'none';
+            
+            showProgress(1, 'processing');
+            addMessage('assistant', '🚀 开始执行全自动生成流程...');
+            
+            try {
+                const response = await fetch('/api/agent/execute', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ config: currentConfig })
+                });
+                
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            handleStreamEvent(data);
+                        }
+                    }
+                }
+            } catch (err) {
+                addMessage('assistant', '❌ 执行失败: ' + err.message);
+            } finally {
+                sendBtn.disabled = false;
+                document.getElementById('executeBtn').disabled = false;
+            }
+        }
+        
+        function handleStreamEvent(data) {
+            if (data.type === 'status') {
+                addMessage('assistant', data.message);
+            } else if (data.type === 'complete') {
+                showProgress(5, 'completed');
+                showResult(data.result);
+                addMessage('assistant', '🎉 全部完成！视频已生成。');
+            } else if (data.type === 'error') {
+                addMessage('assistant', '❌ 错误: ' + data.message);
+            }
+        }
+        
+        function quickAction(type) {
+            let message = '';
+            switch(type) {
+                case 'single':
+                    message = '帮我制作一个关于气候变化的英语演讲视频，使用大学四六级难度，激励型风格';
+                    break;
+                case 'batch':
+                    message = '我想生成10个关于人工智能的英语演讲视频，每个使用不同的主题角度';
+                    break;
+                case 'random':
+                    message = '随机生成一个有趣的英语演讲视频主题';
+                    break;
+            }
+            sendMessage(message);
+        }
+        
+        function clearChat() {
+            conversationHistory = [];
+            chatContainer.innerHTML = `
+                <div class="chat-message assistant">
+                    <div class="role">AI Agent</div>
+                    <div class="content">
+                        👋 对话已清空！请告诉我你想要什么样的视频。
+                    </div>
+                </div>
+            `;
+            configPanel.style.display = 'none';
+            progressPanel.style.display = 'none';
+            resultPanel.style.display = 'none';
+            currentConfig = null;
+            currentResult = null;
+        }
+        
+        function openResult() {
+            if (currentResult) {
+                fetch('/api/open_folder', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        file_path: currentResult.video_path || currentResult.audio_path
+                    })
+                });
+            }
+        }
+        
+        function startNew() {
+            clearChat();
+        }
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        sendBtn.addEventListener('click', () => sendMessage());
+    </script>
+</body>
+</html>
