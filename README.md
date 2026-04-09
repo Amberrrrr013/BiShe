@@ -53,7 +53,7 @@ D:\_BiShe\
 ├── faster-whisper/              # Faster Whisper语音识别
 ├── wav2lip/                     # Wav2Lip唇形同步
 ├── sadtalker/                   # SadTalker头部动画
-└──gfpgan/                       # GFPGAN图像增强
+└── gfpgan/                       # GFPGAN图像增强
 ```
 
 ---
