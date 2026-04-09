@@ -52,10 +52,8 @@ D:\_BiShe\
 ├── kokoro-tts/                  # Kokoro TTS本地模型（新增）
 ├── faster-whisper/              # Faster Whisper语音识别
 ├── wav2lip/                     # Wav2Lip唇形同步
-├── sadtalker/                  # SadTalker头部动画
-├── gfpgan/                      # GFPGAN图像增强
-│
-└── 王众开题报告.*               # 毕业设计开题报告
+├── sadtalker/                   # SadTalker头部动画
+└──gfpgan/                       # GFPGAN图像增强
 ```
 
 ---
