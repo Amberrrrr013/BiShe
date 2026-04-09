@@ -1,0 +1,113 @@
+# ==================== 安全相关 ====================
+# API密钥和配置（包含敏感信息）
+config.py
+api_config.py
+.env
+.env.local
+.env.*.local
+
+# ==================== Git ====================
+.git/
+.gitignore
+
+# ==================== Python ====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# ==================== 输出目录 ====================
+outputs/
+results/
+temp/
+cache/
+output/
+image_library/image/
+image_library/audio/
+image_library/video/
+image_library/final/
+image_library/non_agent/
+image_library/rich_final/
+image_library/teen_happy/
+image_library/temp/
+test_split/
+test_text_video/
+
+# ==================== 模型文件 ====================
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.bin
+*.h5
+*.pkl
+*.joblib
+
+# ==================== 日志和临时文件 ====================
+*.log
+server.log
+error.log
+test.log
+api_error.log
+*.out
+nul
+
+# ==================== Windows ====================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ==================== IDE ====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sln
+*.slnx
+*.user
+*.suo
+
+# ==================== 测试输出 ====================
+*.wav
+*.mp3
+*.mp4
+*.avi
+*.mov
+*.jpg
+*.jpeg
+*.gif
+*.png
+test_workflow_full.mp3
+
+# ==================== 前端 ====================
+node_modules/
+frontend/dist/
+frontend/build/
