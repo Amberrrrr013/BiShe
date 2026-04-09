@@ -1,0 +1,4 @@
+# Config package
+from .prompt_templates import DIFFICULTY_DESCRIPTIONS, STYLE_DESCRIPTIONS
+
+__all__ = ['DIFFICULTY_DESCRIPTIONS', 'STYLE_DESCRIPTIONS']
