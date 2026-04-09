@@ -19,10 +19,10 @@
 
 ```
 D:\_BiShe\
-├── demo_1/                      # 主项目目录
+├── demo_1/                       # 主项目目录
 │   ├── server.py                 # Flask API服务器（核心入口）
 │   ├── workflow.py               # LangGraph工作流（手动/半自动模式）
-│   ├── agent_workflow.py        # Agent工作流（批量生成模式）
+│   ├── agent_workflow.py         # Agent工作流（批量生成模式）
 │   ├── skills.py                 # 技能系统定义（7种Skill）
 │   ├── config.py                 # 全局配置
 │   ├── api_config.py             # API配置管理（多provider支持）
@@ -45,14 +45,14 @@ D:\_BiShe\
 │   │
 │   ├── image_library/            # 本地图片库（随机头像）
 │   ├── output/                   # 生成输出目录
-│   └── requirements.txt           # Python依赖
+│   └── requirements.txt          # Python依赖
 │
-├── piper-tts/                   # Piper TTS本地模型
-├── xtts-v2/                     # XTTS V2音色克隆模型
-├── kokoro-tts/                  # Kokoro TTS本地模型（新增）
-├── faster-whisper/              # Faster Whisper语音识别
-├── wav2lip/                     # Wav2Lip唇形同步
-├── sadtalker/                   # SadTalker头部动画
+├── piper-tts/                    # Piper TTS本地模型
+├── xtts-v2/                      # XTTS V2音色克隆模型
+├── kokoro-tts/                   # Kokoro TTS本地模型（新增）
+├── faster-whisper/               # Faster Whisper语音识别
+├── wav2lip/                      # Wav2Lip唇形同步
+├── sadtalker/                    # SadTalker头部动画
 └── gfpgan/                       # GFPGAN图像增强
 ```
 
@@ -73,7 +73,7 @@ D:\_BiShe\
 | 模式 | 说明 | API支持 |
 |------|------|---------|
 | **用户文本** | 用户直接提供完整演讲稿 | - |
-| **AI生成** | 根据主题、长度、难度、风格生成 | MiniMax-Text-01 / GLM-4 / GPT-4o |
+| **AI生成** | 根据主题、长度、难度、风格生成 | MiniMax-M2.7 / GLM-4.6 |
 | **随机生成** | 随机生成日常口语练习文本 | - |
 
 **难度级别**: elementary / middle_school / high_school / college_cet / english_major / native
@@ -88,13 +88,12 @@ D:\_BiShe\
 | **Piper** | 本地 | 固定模型，快速生成 |
 | **XTTS V2** | 本地 | 音色克隆，需参考音频，非商业授权 |
 | **MiniMax** | 在线 | speech-2.8-hd 模型，多种音色可选 |
-| **Edge TTS** | 在线 | 备用方案 |
 
 **Kokoro 可用音色**:
 - 女声: af_heart(温暖) / af_bella(清晰) / af_sarah(活泼) / af_sky(轻快) / af_nova(成熟) / af_alloy(干练) 等
 - 男声: am_adam(有力) / am_michael(正式) / am_eric(自信) / am_puck(轻松) 等
 
-**WER检测**: 使用Faster-Whisper自动检测语音与文本匹配度，不满意自动重试（最多5次）
+**WER检测**: 使用Faster-Whisper自动检测语音与文本匹配度，WER指数未达到设定标准则重新生成，最多生成5次
 
 ### 4. 图像处理
 
@@ -131,7 +130,6 @@ D:\_BiShe\
 
 - **字幕生成**: 根据Whisper时间戳自动生成SRT字幕
 - **字幕烧录**: 使用FFmpeg将字幕烧入视频底部
-- **纯文本视频**: 无人物出镜的文字同步视频模式
 - **仅音频模式**: 只生成音频不生成视频
 
 ---
@@ -152,7 +150,7 @@ cd D:\_BiShe\demo_1
 python server.py
 ```
 
-浏览器打开: http://localhost:5000/frontend
+前端界面地址: http://localhost:5000/frontend
 
 ### 3. 配置API密钥
 
@@ -163,7 +161,7 @@ API_CONFIG = {
     "text_api": {
         "provider": "minimax",  # minimax / glm / openai
         "api_key": "你的密钥",
-        "model": "MiniMax-Text-01",
+        "model": "MiniMax-M2.7",
         "base_url": "https://api.minimaxi.com/v1"
     },
     "tts_api": {
@@ -289,94 +287,99 @@ MIT License
 
 ---
 
-## 参考论文 / 资料
+## 参考论文
 
-### 英语多模态教学相关
+### 1. 英语演讲教学 / AI辅助英语教学
 
-- [The Future of AI in Teleprompters: Enhancing Public Speaking and Broadcasting](https://www.pitchhub.com/post/the-future-of-ai-in-teleprompters-enhancing-public-speaking-and-broadcasting)
-- [基于多模态学习的英语听说教学研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS7e0LbIUB_2E1mXPQ0OyWHwQWJhSFTG_ZVjpEriCNO1sOAWjDUASVHMnuSxwFkxBRJwxvHMoF8zdkjp93rikTVjxCTeOewax8DDu03AxmN95kX1ktH0AH0JUHYW_sewBAiMohTYu5hGNt3kd6dOUkDfW4KrtxHeM2cIRqC_EP2R8A==&uniplatform=NZKPT&language=CHS)
-- [多模态视角下的英语教学模式创新研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS6nd0QR23ycusCiE587Ljt0KPmK9Qi6ulLZqn78FKjPF8vQLWYwrvvFFyGWvRKKRsmlr4NCfsQpFhOyUNtmeiBoELTrV5PsLWo-83-hMd9r8IXabOKjygZnPPFMsRYQxQT3yU1MVfUtsz7_j6ylwJLE-iE9PAGWFQGljJys8t36ig==&uniplatform=NZKPT&language=CHS)
-- [人工智能赋能英语教学创新研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS7Q4Xo8q9SGEb18UzLRajQNOhUfH30hkJcSw7TXzI7T7gsf3FUVXZnKMoz1i4B-ltz2O05Aw4G5l9rdvsWRSt5VzUJtkR3Z-OaHW-82Lq9poRrMfbzvdiwW0Qwa55DBaHvLUMgPbGf0Gp0jmYh-JUydVZ16lfembbx-0gnSUxWuqA==&uniplatform=NZKPT&language=CHS)
-- [人工智能在英语教育中的应用研究](https://kns.cnki.net/kcms2/article/abstract?v=Y4WXQ1XfpS58Rzk9xzRsWXbnkxV4i5DRKrtSHJqTRm6riZuWkgvDqP34UxGn0KB_4NNe0KVTgL86ZuXcmG5n9HGqcjkZBkJzi9EWgJogy1gGT6rsn_EIeMFUJbSuAt6xkdbMgA0iyyNry9zHv8gSuL4tr0xU2R0NGNXNq3HGNJLeSbjU84goRqsnAwHVHbWH&uniplatform=NZKPT&language=CHS)
-- [面向英语教学的AI多模态交互系统设计](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0YPpvD98iQoJ-cUMuIwhpVIhGcM_pVrL4LAKRgYR07tlWG6MVGQgpm01Ow5r5_-lsHarHIaBG0msop2mnwy6F8svdzVA3jKUnKIs2eo_c-FgsPD_xJ9-VgwqEQ834bkWmshwy9LJgSVVFwMkZfTtIj0P0NiJbUzNLFppN_pWfMbCQ==&uniplatform=NZKPT&language=CHS)
-- [智能语音技术在英语口语教学中的应用](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0b_pwlaRYpH8nrM-YMZG5AiAwYM64FwngsSLV0warSjx3KaVd2j8tgTJ4Vodwyy18hR9lL6LNLfoupKpHToqCU4VX0CRsZaYpotLciYpQ6f23gFBQniFaTm3rRgKb__gmFIqagspmZ7jckDR24z44CmB-3mWsHZDTRAegCwQpJQoQ==&uniplatform=NZKPT&language=CHS)
-- [基于深度学习的英语语音识别与教学研究](https://kns.cnki.net/kcms2/article/abstract?v=YNWfVykhE0bB1q0vGtKcLAdhqf3G30MyNEv5TcA5fXR260NqO4AjUnFciuLFTJJrKU-r3AmEVaxys8JLhB64K6lrtnOVedC912KkiwXn044UguimovDDOpRVaiMHDtXuCTc814QsiBR-P58nhJL4gg5PzEjbHYwf83QUh2HxT2hL1j44w8Uemg==&uniplatform=NZKPT&language=CHS)
-- [大语言模型在英语教学中的应用探索](https://kns.cnki.net/kcms2/article/abstract?v=YFFVSRMG_GF45xRT1EoH-dYRO0C0e-ibyb-Xasi1zXDWvfzaNAGUeld4-Pu8kQaEYnde_mKtYSkQ8HCdhiM-LOFu4z7ZPxFZ64WzAxvkPYwZGTBslBwrWWR4MJN9m6YQYXKGJEBctANGqQQxLNW-2jhAg3xq7zGFDJR9Q_xLk-sUJBZlwXq027ocQtghgSgc&uniplatform=NZKPT)
-- [AI-Enhanced Pronunciation Training: Systematic Review](https://www.sciencedirect.com/science/article/abs/pii/S0885230825001147)
-- [Multimodal Learning for English Speaking Practice](https://dl.acm.org/doi/10.1145/3482632.3483130)
-- [Speech Technology for Language Learning: A Systematic Review](https://www.sciencedirect.com/science/article/pii/S0023969025001183)
-- [AI in Education: English Language Teaching 4.0](https://bera-journals.onlinelibrary.wiley.com/doi/full/10.1111/bjet.13460)
-- [人工智能支持下的英语多模态教学研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji05HqjAbosqEKy7SlpCeTpSCCSgPBU1Qz5OjToYf4fJR-LW8vV4Q1B2SIVjS2TfXP_LfCm_VYp9A8BlKwjSFqScPY1wuv3BEROxVKOZFDktjg0yvIdE0MwAMOCttVx9_rVUbFU3bJo3HFuqfcdCTMRpXK4X130oygFtS2-rZjd22Yw==&uniplatform=NZKPT&language=CHS)
-- [基于深度学习的多模态英语教学系统研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji047tkNecrCsfJErLf_nhRy3Aev7bpkyF3FSG2Pl2sXjNzFqN0pcF0b-IYGlyvi-JuLpBDL_dkb8Sns1aXECUMvO7jzuLXFny2qdWE1qAB5O_BbdDWMJJUVuTH0dEawYO1yj94h7TKeuIMmJ-kKmtpfy6ga_1PjhDXoLnAqXFLtAFw==&uniplatform=NZKPT&language=CHS)
-- [智能语音交互在英语口语教学中的应用研究](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji05nCwKdLaP8hZaZSt-8ydbvxBzPPiK830nqOqfzukTetf9AxoJFUYJoCJb_xL0M_Fz7JROIi6iVMb11URrPeY4ebSHfsJBEZ3eGL4ECqAHt5QORGOQJ9vo_DhiEK2UXIsTS-A4PpMJMCQmshx8XQPsW6G02aAYCMzalkeKl58Aj8CoPQOHmeq7a&uniplatform=NZKPT&language=CHS)
-- [多模态AI技术在英语听说教学中的应用与实践](https://kns.cnki.net/kcms2/article/abstract?v=9jT59j8Ji07W7G23cnb6XvijekQ1B3xutaXlzgBibovch_Ulgxi7GGYnacve4YcvrUBKaHK8khf-UKcVbjsnFvG5b_YwWeshzkexxUyiHhTswvSgAKKaafYLu0qpSiDt6NXT05rEIzfYRgjjctxDEFl_XVxsAmIFnisoRfn2DjBWOcQMDrGVhQ==&uniplatform=NZKPT&language=CHS)
+- [AI and English language teaching: Affordances and challenges](https://bera-journals.onlinelibrary.wiley.com/doi/full/10.1111/bjet.13460)
+- [AI-supported English public speaking in the Chinese EFL context: Insights from self-regulated learning and positive psychology](https://www.sciencedirect.com/science/article/abs/pii/S0023969025001183)
+- [AudiLens: Configurable LLM-Generated Audiences for Public Speech Practice](https://dl.acm.org/doi/10.1145/3586182.3625114)
+- [English Listening Teaching Mode under Artificial Intelligence Speech Synthesis Technology](https://dl.acm.org/doi/10.1145/3615866)
+- [EnglishBot: An AI-Powered Conversational System for Second Language Learning](https://dl.acm.org/doi/10.1145/3397481.3450648)
+- [Large Language Models Cover for Speech Recognition Mistakes: Evaluating Conversational AI for Second Language Learners](https://dl.acm.org/doi/10.5555/3721488.3721749)
+- [Learning through AI-clones: Enhancing self-perception and presentation performance](https://www.sciencedirect.com/science/article/pii/S2949882125000015)
+- [MultiGen: Child-Friendly Multilingual Speech Generator with LLMs](https://dl.acm.org/doi/10.1145/3747327.3764897)
+- [The Application of Computer Speech Recognition Technology in Oral English Teaching](https://dl.acm.org/doi/10.1145/3482632.3483130)
+- [“讲好中国故事”视角下英语演讲课程培养跨文化能力的教学路径研究](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqtOC8aiLkhv2wGn8dRMkmCCsiSZ5juQrJK4MIalBe_jPX6-qsGdfdZci7SyDjiXI-Al2NDe4QMyBzdF7PltvMnZJI7VD5BD4UJitTiOqT46-cDp_LY6JFcIxktj5ef4PeQuD87FwyJLrwgVbh1fNviGZ-Y-H9sFnBH22soVclUOt2a0pgWQJSbz0eE0fwg54f4&uniplatform=NZKPT&captchaId=a2f85514-8a66-4fdb-a915-cbc518efcbbb)
+- [大学中普及英语公众演讲课程的必要性与可行性](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqvYsReVBbvIWk7Fyxwl71a407Ibpuux6R9yDjmvWpYPMQs5dRwBI5ZtUG4LtdVpGlB7tgu20VIe7MZPaZuQRX1pBYITV1wwXP-Alv4izOA1EuZAepqlfVb-Wkbo6gYziduxgLbBkCOgR2Xe-NqxIbg6kL4OMkweE845JQYe2L0-o5Yyl-SOnud28F5b6ivnMRE&uniplatform=NZKPT&captchaId=387d7b57-f7a8-4003-843c-915ab907d6b3)
+- [多模态AI技术驱动英语听说课教学评一体化模式构建](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqvKlKxCP3BP_YjaUvyJmZTFTM8xQgG-soOkE46rVirctrWTdwOYt78andvWvtHlijkVQNZxE9huqggC5h3FMYBYr7qskkj46Z9wwGkZ8URyFgquPnd_KrQn8YIhB4VvIc3rnS9bqAVw2Ki8-qbJeaSuZm8nDtkepMYmcwljRWHipBuVKRnAVK1M&uniplatform=NZKPT&captchaId=bd8f684c-b903-4cd0-8590-9d842cef7a0a)
+- [人工智能（AI）辅助应用写作之优势、局限与优化——基于演讲稿教学实践的反思](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mquUyLayCPPFvdnU3HbBEiD8dvRysBvJJ9br2lhxn4V7VpXK-iezLfmg4sbc4zto59c64JYa_o4lpceASOhkeHPwTXbM_kVl0_1Y988e7MB0pkBSrkSAm0-jp-q0lrbD9Y-pXumHKrlKtPRRBJmbiBnN7jBZ6L73TNiF4HxLN1SZQ7A3EB9yICQ6HKC028ZXp70&uniplatform=NZKPT&captchaId=2fdcb683-d32e-4ef2-9f8f-447a8ea5161a)
+- [人工智能多模态教学资源的生成与评价——基于AIGC在国际中文教育的应用](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqt-5xPMwbBN6kMZ4THTDb2rsYDYw8K5sILw2pe9a3TQTv8ELGfsGQRECuCGk7LXcjtncjuNfGL9_Cl5g_LnLXkqu3XFLcwTgyV0wOAkNAjS-AH3r-nvkLdyRFhfs3IDvIODGhfuSFTXIndoidjLSw5uTTjK_xCaCbXoVXcmOV_dV4Bb76H_hp6xEZVE3LTKle0&uniplatform=NZKPT&captchaId=543cc7eb-68be-4d68-a4bf-a5ae841528b0)
+- [人工智能技术促进英语演讲课程教学数字化转型的创新路径研究](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqt7My1TbwDDyS_2wGjCHA1NjanLKWpapc8nrpSgj72gQgAdtj0eu8QGu7cSwGYsAfGpytiFHC1xZIVz-l3eZ3skDUToW4mqfzG607flp_CRvX_c39nz0bYE3UJoHPa4rKFJVvk-1NQx0x2sKhAIo4AGnNJcO0F3ASMKzEVR97UaVpB6zpRpBnLUaAgFETULJjY&uniplatform=NZKPT&captchaId=f445cde0-65c9-424f-9449-96a6fb13fd53)
 
-### Agent系统搭建相关
+### 2. Agent多模态应用 / Agent框架理论
 
-- [LangGraph Documentation](https://blog.csdn.net/qq_42956179/article/details/143116547)
-- [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2204.07851)
-- [AutoGen: Enabling Next-Gen AI Applications](https://www.sciencedirect.com/science/article/pii/S2949882125000015)
-- [AgentVerse: Enhancing Multi-Agent Cooperation](https://dl.acm.org/doi/10.1145/3593013.3594011)
-- [CAMEL: Communicative Agents Framework](https://dl.acm.org/doi/10.1145/3397481.3450648)
-- [Role-Playing with Language Models](https://dl.acm.org/doi/10.1145/3726302.3730136)
-- [Multi-Agent Collaboration in LangGraph](https://dl.acm.org/doi/10.1145/3715275.3732018)
-- [Conversational AI with Multi-Agent Systems](https://dl.acm.org/doi/10.1145/3745238.3745531)
-- [Building Effective AI Agents: A Survey](https://dl.acm.org/doi/10.1145/3711828)
-- [OpenAI Agents SDK](https://dl.acm.org/doi/10.1145/3593013.3594011)
-- [Agent-Oriented Workflow Automation](https://dl.acm.org/doi/10.1145/3746027.3755423)
-- [LLM-based Autonomous Agents: A Survey](https://dl.acm.org/doi/10.1145/3721488.3721749)
-- [Coze Agent Platform Documentation](https://www.coze.cn/open/docs/guides)
-- [Coze Studio GitHub](https://github.com/coze-dev/coze-studio/blob/main/README.zh_CN.md)
-- [Fay: Open-source Digital Human Agent](https://github.com/xszyou/Fay)
-- [EMO: Emote Portrait Alive - Audio-Driven Video Generation](https://github.com/HumanAIGC/EMO)
-- [Reasoning with Large Language Models](https://arxiv.org/abs/2602.11790)
-- [Tool Learning with Language Models](https://arxiv.org/abs/2603.28088)
-- [Multimodal Large Language Models](https://arxiv.org/abs/2601.18543)
-- [Vision-Language Models for Robotics](https://arxiv.org/abs/2603.29620)
-- [Large Language Model Agents: A Survey](https://arxiv.org/abs/2603.02697)
-- [Understanding AI Agent Systems](https://arxiv.org/abs/2511.04570)
-- [LLM Agents: Theory and Practice](https://arxiv.org/abs/2307.09368)
+- [A Survey of Multi-AI Agent Collaboration: Theories, Technologies and Applications](https://dl.acm.org/doi/10.1145/3745238.3745531)
+- [AIPO: Automatic Instruction Prompt Optimization by model itself with “Gradient Ascent”](https://www.sciencedirect.com/science/article/abs/pii/S0885230825001147)
+- [Beyond End-to-End Video Models: An LLM-Based Multi-Agent System for Educational Video Generation](https://arxiv.org/abs/2602.11790)
+- [Cued-Agent: A Collaborative Multi-Agent System for Automatic Cued Speech Recognition](https://dl.acm.org/doi/10.1145/3746027.3755423)
+- [GEMS: Agent-Native Multimodal Generation with Memory and Skills](https://arxiv.org/abs/2603.28088)
+- [GenAgent: Scaling Text-to-Image Generation via Agentic Multimodal Reasoning](https://arxiv.org/abs/2601.18543)
+- [More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models](https://arxiv.org/abs/2505.21523)
+- [MOVA: Towards Scalable and Synchronized Video-Audio Generation](https://arxiv.org/abs/2602.08794)
+- [ShareVerse: Multi-Agent Consistent Video Generation for Shared World Modeling](https://arxiv.org/abs/2603.02697)
+- [TermiGen: High-Fidelity Environment and Robust Trajectory Synthesis for Terminal Agents](https://arxiv.org/abs/2602.07274)
+- [Thinking with Video: Video Generation as a Promising Multimodal Reasoning Paradigm](https://arxiv.org/abs/2511.04570)
+- [Unify-Agent: A Unified Multimodal Agent for World-Grounded Image Synthesis](https://arxiv.org/abs/2603.29620)
+- [UniVA: Universal Video Agent towards Open-Source Next-Generation Video Generalist](https://arxiv.org/abs/2511.08521)
 
-### 其他相关
+### 3. 文本生成语音 / 语音识别 / 语音质量评估
 
-- **语音识别 (ASR)**
-  - [Whisper: OpenAI Speech Recognition](https://openai.com/index/whisper/)
-  - [Whisper GitHub](https://github.com/openai/whisper)
-  - [Whisper Paper](https://cdn.openai.com/papers/whisper.pdf)
-  - [faster-whisper PyPI](https://pypi.org/project/faster-whisper/)
-  - [Vosk Speech Recognition](https://alphacephei.com/vosk/models)
-  - [Vosk API GitHub](https://github.com/alphacep/vosk-api)
-  - [NVIDIA ASR Technology Guide](https://developer.nvidia.com/blog/essential-guide-to-automatic-speech-recognition-technology/)
+- [“It’s not a representation of me”: Examining Accent Bias and Digital Exclusion in Synthetic AI Voice Services](https://dl.acm.org/doi/10.1145/3715275.3732018)
+- [Conformer-based Tibetan Speech Recognition Algorithm](https://dl.acm.org/doi/10.1145/3708657.3708775)
+- [Good practices for evaluation of synthesized speech](https://arxiv.org/abs/2503.03250v2)
+- [On the Praxes and Politics of AI Speech Emotion Recognition](https://dl.acm.org/doi/10.1145/3593013.3594011)
+- [StepWrite: Adaptive Planning for Speech-Driven Text Generation](https://dl.acm.org/doi/10.1145/3746059.3747610)
+- [Task-specific, personalized Automatic Speech Recognition](https://dl.acm.org/doi/10.1145/3699682.3728347)
+- [基于Whisper模型的多任务学习的口语评测打分方法](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqspJ0QhLRM3G5I9D-yrtbhx7Ao22cZIG956_XVEVnVrBHKTwLZjohIjpOqClfVLe1ZrdXgV7gL34m6gIwy4Xx_ISaGF-bckn_lyjSflhFOxAy8lQHa-0Cp2V38KKRV_TgaORp3cXFfXOvoLDOZBIieFO520u68UrG8fiCpvj6j94CFBbvKZwg9u7smmMn8QB60&uniplatform=NZKPT&captchaId=d0f21d69-f163-4346-bfb8-58bbdfa76141)
+- [基于Whisper模型的机载环境下的语音识别方法研究](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqs4ILDXCZFrJHFCvDKVXIh5f6aAMAFdupJDyZ_bzNNQG0REGqIeOscWs3BYKEm62CoKoS54_WX4ZImWJFMjFR3lnQQPxE0qGkgYGnSAMGBYMy6_iU1TwmxMnu6iAiD0wy1jA45Mznk6Ni_LRrZF8JzXkuiCZ8jzgQaWpQxDRX3__xOi29VlHpAkW3xtExB51GY&uniplatform=NZKPT&captchaId=5d0c1bc5-bdca-4a6d-97ff-cd6becfa8167)
+- [基于机器学习与TF-IDF、Word2Vec的文本情感分析](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqtNhbDVu_q2-IcRe5CtP6U86DJoCwGw_JSNkktyiESXFeocFLIdAFFIWBqmXi836aqhoT1CKA6tBs2HKl6X2_u9OYBpmKF65uaclOLPV8-dFTZ7yQi7gOwfCqoiZnwvShICtEigNd1uVVLixmRCPD1Gm5eUD_MCMYq_8xZ6SfunN9CcSxgifHcp&uniplatform=NZKPT&captchaId=d686403c-67e4-4a09-9e8d-7b8fdea03447)
 
-- **唇形同步与说话人头像 (Talking Head)**
-  - [SadTalker: Talking Head Generation](https://arxiv.org/abs/2210.15741)
-  - [Wav2Lip: Lip Sync from Audio](https://github.com/jiwoo-jeong/wav2lip)
-  - [Awesome Talking Head Synthesis](https://github.com/Kedreamix/Awesome-Talking-Head-Synthesis)
-  - [MuseV: Virtual Human Video Generation](https://github.com/TMElyralab/MuseV)
-  - [MuseTalk: Real-Time Talking Head](https://github.com/TMElyralab/MuseTalk)
-  - [MusePose: Pose-Driven Video Generation](https://github.com/TMElyralab/MusePose)
-  - [VASA-1: Microsoft's Visual-Audio Synthesis](https://www.microsoft.com/en-us/research/project/vasa-1/)
-  - [EMO: Emote Portrait Alive 2](https://humanaigc.github.io/emote-portrait-alive-2/)
-  - [HiAR: Human Interactive Animation](https://jacky-hate.github.io/HiAR/)
-  - [Wan Video: AI Video Creation](https://create.wan.video/explore)
+### 4. 数字人 / 唇音同步 / 视频生成
 
-- **视频生成 (Video Generation)**
-  - [LTX-Video: Transformer-based Video Model](https://huggingface.co/Lightricks/LTX-Video-ICLoRA-canny-13b-0.9.7)
-  - [Spatial Audio Rendering for Speech Translation](https://www.microsoft.com/en-us/research/video/spatial-audio-rendering-for-speech-live-translation/)
-  - [Terminal Bench Environment](https://github.com/ucsb-mlsec/terminal-bench-env)
+- [A Lip Sync Expert Is All You Need for Speech to Lip Generation In The Wild](https://arxiv.org/abs/2008.10010)
+- [Audio-driven Talking Face Generation with Stabilized Synchronization Loss](https://arxiv.org/abs/2307.09368)
+- [EMO: Emote Portrait Alive -- Generating Expressive Portrait Videos with Audio2Video Diffusion Model under Weak Conditions](https://arxiv.org/abs/2402.17485)
+- [HiAR: Efficient Autoregressive Long Video Generation via Hierarchical Denoising](https://arxiv.org/abs/2603.08703)
+- [MuseTalk: Real-Time High-Fidelity Video Dubbing via Spatio-Temporal Sampling](https://arxiv.org/abs/2410.10122)
+- [Paper2Video: Automatic Video Generation from Scientific Papers](https://arxiv.org/abs/2510.05096)
+- [SadTalker: Learning Realistic 3D Motion Coefficients for Stylized Audio-Driven Single Image Talking Face Animation](https://arxiv.org/abs/2211.12194)
+- [SANA-Video: Efficient Video Generation with Block Linear Diffusion Transformer](https://arxiv.org/abs/2509.24695)
+- [SyncTalk++: High-Fidelity and Efficient Synchronized Talking Heads Synthesis Using Gaussian Splatting](https://arxiv.org/abs/2506.14742)
+- [VASA-1: Lifelike Audio-Driven Talking Faces Generated in Real Time](https://arxiv.org/abs/2404.10667)
+- [多模态驱动情感可控的面部动画生成模型](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqtb9CdOHtHQ-r_tfBH6JZWb7iyVNIca8_IsmGjPeDMKcj8YV65VmqJ8tm7qiJmQ2TMDxdCBnkrRtav_YJujE4bfxJzLWPZIPIMi9guLJgeamrMdpyJffC4aW6_FAcxuw3mXT-P576PtNNsy7f46S-6xKaUXm-SpSHqAewuOP6KM5-JjvD0C6KKu&uniplatform=NZKPT&captchaId=73148d69-35a5-4947-b47a-4e39a40d651f)
+- [融合时序建模与风格表达的2D说话人视频生成方法](https://kns.cnki.net/kcms2/article/abstract?v=y_SiIdm5mqtHA1KmyPJS-yCPgzlEP64qzwnGVc2Fkbgv1a94mh_5rM5dgZ8UpqVJlZUpDzb5VoiISvkPj_zD8JDjjGQxe1Na5z1B0E5M2eXZRvi3g4vQxIX09VKqoGakZNR8zQiwdd2vPL_0Z9DwDRnqvpD97ACRZcwxQceNAQ7XF4lsKON6ZtCAozkyFXtHiXq3JRSdvV8&uniplatform=NZKPT&captchaId=82802ddb-0785-400e-98dd-ddadc8761540)
 
-- **技术教程与资源**
-  - [知乎: 数字人多模态技术综述](https://zhuanlan.zhihu.com/p/670962982)
-  - [知乎: 多模态AI数字人专题](https://zhuanlan.zhihu.com/c_1717215615826153474)
-  - [知乎: AI数字人技术发展](https://zhuanlan.zhihu.com/p/1958858515323007594)
-  - [腾讯云: AI数字人开发指南](https://cloud.tencent.com/developer/article/2589878)
-  - [阿里云: 数字人技术解析](https://www.aliyun.com/sswb/1192813.html)
-  - [腾讯云: 多模态技术应用](https://cloud.tencent.com/developer/article/2629105)
-  - [Bilibili: AI技术解读](https://www.bilibili.com/opus/1165340570090995712)
-  - [AutoDL平台](https://www.autodl.com/home)
-  - [天池数据集: 语音数据](https://tianchi.aliyun.com/dataset/88096)
-  - [天池数据集: 视频数据](https://tianchi.aliyun.com/dataset/90386)
+---
 
-- **开源项目**
-  - [MOVA: Multimodal Open Vision Architecture](https://github.com/OpenMOSS/MOVA)
-  - [aimh8 Digital Human](https://github.com/lakysir/aimh8_digital_human)
+## 技术教程与教学资源
+
+- [AutoDL](https://www.autodl.com) - GPU云计算平台
+- [Awesome-Talking-Head-Synthesis](https://github.com/Kedreamix/Awesome-Talking-Head-Synthesis) - 说话人脸资源库
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI) - 强大的AI图像/视频生成UI框架
+- [ControlNet](https://github.com/lllyasviel/ControlNet) - 控制图像生成的条件扩散模型
+- [Diffusers](https://github.com/huggingface/diffusers) - Hugging Face扩散模型工具库
+- [Faster-whisper](https://pypi.org/project/faster-whisper/) - faster-whisper官网
+- [FFmpeg Documentation](https://ffmpeg.org/documentation.html) - FFmpeg官方文档
+- [FunASR](https://github.com/modelscope/FunASR) - 阿里FunASR语音识别工具包
+- [GFPGAN](https://github.com/TencentARC/GFPGAN) - 腾讯GFPGAN图像超分辨率
+- [GLM API](https://bigmodel.cn/dev/api) - 智谱GLM大模型API官方文档
+- [Introducing Whisper](https://openai.com/index/whisper/) - OpenAI Whisper官网
+- [IP-Adapter](https://github.com/tencent-ailab/IP-Adapter) - 腾讯IP-Adapter多条件图像生成
+- [LangChain Tutorials](https://python.langchain.com/docs/tutorials/) - LangChain官方教程
+- [LangGraph](https://github.com/langchain-ai/langgraph) - LangChain构建Agent工作流的图框架
+- [LangGraph-Course](https://github.com/microsoft/LangGraph-Course) - LangGraph官方课程
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - LangGraph官方文档
+- [LibriSpeech ASR Corpus](https://www.openslr.org/12) - 1000小时英语语音识别数据集
+- [LibriSpeech ASR语料库](https://tianchi.aliyun.com/dataset/88096) - 阿里云LibriSpeech中文镜像
+- [MiniMax API Documentation](https://www.minimaxi.com/docs) - MiniMax API官方文档
+- [MOVA](https://github.com/OpenMOSS/MOVA) - OpenMOSS同步视频音频生成开源foundation model
+- [MusePose](https://github.com/TMElyralab/MusePose) - 腾讯MusePose姿态驱动图像转视频
+- [MuseV](https://github.com/TMElyralab/MuseV) - 腾讯MuseV虚拟人视频生成
+- [SANA-Video](https://tianchi.aliyun.com/dataset/110649) - 阿里云SANA高效视频生成
+- [TED Talks Dataset](https://tianchi.aliyun.com/dataset/90386) - 阿里云TED演讲数据集(含字幕)
+- [Vosk](https://alphacephei.com/vosk) - 语音识别工具
+- [Wan2.1](https://github.com/Wan-Video/Wan2.1) - 视频生成开源模型
+- [Whisper Tutorial](https://github.com/openai/whisper/tree/main/notebooks) - Whisper官方notebooks教程
+
+---
