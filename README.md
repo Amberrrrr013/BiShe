@@ -6,10 +6,12 @@
 
 ## 项目概述
 
-本系统为毕业设计项目，可将英文演讲文本自动转换为带有人物说话头像的视频，适用于英语口语练习场景。
+本系统可将英文演讲文本自动转换为带有人物说话头像的视频，适用于英语口语练习场景。
 
 **核心功能流程**:
+
 ```
+
 文本生成 → 语音合成 → 图像获取 → 视频生成 → 字幕烧录 → 最终视频
 ```
 
@@ -18,8 +20,9 @@
 ## 项目结构
 
 ```
-D:\_BiShe\
-├── demo_1/                       # 主项目目录
+
+AgentDriven_EnglishSpeechVideo_GenerationSystem/
+├── system_framework/             # 主项目目录
 │   ├── server.py                 # Flask API服务器（核心入口）
 │   ├── workflow.py               # LangGraph工作流（手动/半自动模式）
 │   ├── agent_workflow.py         # Agent工作流（批量生成模式）
@@ -47,13 +50,13 @@ D:\_BiShe\
 │   ├── output/                   # 生成输出目录
 │   └── requirements.txt          # Python依赖
 │
-├── piper-tts/                    # Piper TTS本地模型
-├── xtts-v2/                      # XTTS V2音色克隆模型
-├── kokoro-tts/                   # Kokoro TTS本地模型（新增）
-├── faster-whisper/               # Faster Whisper语音识别
-├── wav2lip/                      # Wav2Lip唇形同步
-├── sadtalker/                    # SadTalker头部动画
-└── gfpgan/                       # GFPGAN图像增强
+├── piper-tts                     # Piper TTS本地模型
+├── xtts-v2                       # XTTS V2音色克隆模型
+├── kokoro-tts                    # Kokoro TTS本地模型（新增）
+├── faster-whisper                # Faster Whisper语音识别
+├── wav2lip                       # Wav2Lip唇形同步
+├── sadtalker                     # SadTalker头部动画
+└── gfpgan                        # GFPGAN图像增强
 ```
 
 ---
@@ -84,9 +87,9 @@ D:\_BiShe\
 
 | 方法 | 类型 | 说明 |
 |------|------|------|
-| **Kokoro** | 本地 | 新增！82M参数，CPU即可运行，速度极快，音质好，不可商用 |
+| **Kokoro** | 本地 | 82M参数，CPU即可运行，速度极快，音质好 |
 | **Piper** | 本地 | 固定模型，快速生成 |
-| **XTTS V2** | 本地 | 音色克隆，需参考音频，非商业授权 |
+| **XTTS V2** | 本地 | 音色克隆，需参考音频 |
 | **MiniMax** | 在线 | speech-2.8-hd 模型，多种音色可选 |
 
 **Kokoro 可用音色**:
@@ -117,7 +120,7 @@ D:\_BiShe\
 
 | 方法 | 类型 | 说明 |
 |------|------|------|
-| **SadTalker** | 本地 | 高质量头部动画，支持FP16加速（1.5-1.8倍） |
+| **SadTalker** | 本地 | 高质量头部动画 |
 | **Wav2Lip** | 本地 | 快速唇形同步 |
 
 **SadTalker参数**:
@@ -139,14 +142,14 @@ D:\_BiShe\
 ### 1. 安装依赖
 
 ```bash
-cd D:\_BiShe\demo_1
+cd 当前系统框架文件夹地址
 pip install -r requirements.txt
 ```
 
 ### 2. 启动系统
-
+手动点击启动该服务器.bat或者：
 ```bash
-cd D:\_BiShe\demo_1
+cd 当前系统框架文件夹地址
 python server.py
 ```
 
@@ -381,5 +384,3 @@ MIT License
 - [Vosk](https://alphacephei.com/vosk) - 语音识别工具
 - [Wan2.1](https://github.com/Wan-Video/Wan2.1) - 视频生成开源模型
 - [Whisper Tutorial](https://github.com/openai/whisper/tree/main/notebooks) - Whisper官方notebooks教程
-
----

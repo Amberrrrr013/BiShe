@@ -9,19 +9,21 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 
-# 设置路径
-DEMO_DIR = Path(r"D:\_BiShe\demo_1")
-TEST_RESOURCE_DIR = DEMO_DIR / "test_resourse"
-OUTPUT_DIR = DEMO_DIR / "output"
+# 设置路径 - 使用项目根目录的父目录作为模型根目录
+PROJECT_DIR = Path(__file__).parent
+MODEL_ROOT = Path(os.getenv("MODEL_ROOT", str(PROJECT_DIR.parent)))
+
+TEST_RESOURCE_DIR = PROJECT_DIR / "test_resourse"
+OUTPUT_DIR = PROJECT_DIR / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # 各模型路径
-WAV2LIP_DIR = Path(r"D:\_BiShe\wav2lip")
-SADTALKER_DIR = Path(r"D:\_BiShe\sadtalker")
-GFPGAN_DIR = Path(r"D:\_BiShe\gfpgan")
-FASTER_WHISPER_DIR = Path(r"D:\_BiShe\faster-whisper")
-PIPER_TTS_DIR = Path(r"D:\_BiShe\piper-tts")
-XTTS_DIR = Path(r"D:\_BiShe\xtts-v2")
+WAV2LIP_DIR = MODEL_ROOT / "wav2lip"
+SADTALKER_DIR = MODEL_ROOT / "sadtalker"
+GFPGAN_DIR = MODEL_ROOT / "gfpgan"
+FASTER_WHISPER_DIR = MODEL_ROOT / "faster-whisper"
+PIPER_TTS_DIR = MODEL_ROOT / "piper-tts"
+XTTS_DIR = MODEL_ROOT / "xtts-v2"
 
 # Python解释器路径
 WAV2LIP_PY = WAV2LIP_DIR / "env" / "Scripts" / "python.exe"

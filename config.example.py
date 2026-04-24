@@ -8,22 +8,23 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent
 OUTPUT_DIR = PROJECT_ROOT / "output"
 
-# 模型路径配置 - 指向父目录的各个模型
-PARENT_DIR = Path(r"D:\_BiShe")
+# 模型路径配置 - 从环境变量 MODEL_ROOT 读取，默认为项目父目录
+# 例如: MODEL_ROOT=D:\_BiShe
+MODEL_ROOT = Path(os.getenv("MODEL_ROOT", str(PROJECT_ROOT.parent)))
 
 # TTS模型路径
-PIPER_MODEL_PATH = PARENT_DIR / "piper-tts" / "en_US-amy-medium.onnx"
-XTTS_MODEL_PATH = PARENT_DIR / "xtts-v2"
+PIPER_MODEL_PATH = MODEL_ROOT / "piper-tts" / "en_US-amy-medium.onnx"
+XTTS_MODEL_PATH = MODEL_ROOT / "xtts-v2"
 
 # Whisper模型路径 (用于WER检测)
-WHISPER_MODEL_PATH = PARENT_DIR / "faster-whisper"
+WHISPER_MODEL_PATH = MODEL_ROOT / "faster-whisper"
 
 # 视频生成模型路径
-WAV2LIP_MODEL_PATH = PARENT_DIR / "wav2lip"
-SADTALKER_MODEL_PATH = PARENT_DIR / "sadtalker"
+WAV2LIP_MODEL_PATH = MODEL_ROOT / "wav2lip"
+SADTALKER_MODEL_PATH = MODEL_ROOT / "sadtalker"
 
 # 图像处理模型路径
-GFPGAN_MODEL_PATH = PARENT_DIR / "gfpgan"
+GFPGAN_MODEL_PATH = MODEL_ROOT / "gfpgan"
 
 # 各模型虚拟环境的 Python 解释器路径
 WAV2LIP_PY = WAV2LIP_MODEL_PATH / "env" / "Scripts" / "python.exe"

@@ -25,6 +25,7 @@ from config import (
     FASTER_WHISPER_PY,
     PIPER_MODEL_PATH,
     PIPER_TTS_PY,
+    KOKORO_PY,
 )
 
 from config import (
@@ -346,7 +347,7 @@ class OnlineTTSProvider(TTSProvider):
         import numpy as np
 
         # Kokoro Python环境路径
-        kokoro_python = r"D:\_BiShe\kokoro-tts\env\Scripts\python.exe"
+        kokoro_python = str(KOKORO_PY)
 
         # 获取音色设置 - 优先使用kokoro_voice，其次使用voice，最后默认af_heart
         # 注意：如果config中的值为None，需要使用fallback

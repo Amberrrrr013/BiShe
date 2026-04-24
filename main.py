@@ -16,16 +16,17 @@ from typing import Optional, Tuple, List, Dict, Any
 # ============================================================
 # 配置路径
 # ============================================================
+import os
 PROJECT_DIR = Path(__file__).parent
-PARENT_DIR = Path(r"D:\_BiShe")
+MODEL_ROOT = Path(os.getenv("MODEL_ROOT", str(PROJECT_DIR.parent)))
 
 # 各模型路径
-WAV2LIP_DIR = PARENT_DIR / "wav2lip"
-SADTALKER_DIR = PARENT_DIR / "sadtalker"
-GFPGAN_DIR = PARENT_DIR / "gfpgan"
-FASTER_WHISPER_DIR = PARENT_DIR / "faster-whisper"
-PIPER_TTS_DIR = PARENT_DIR / "piper-tts"
-XTTS_DIR = PARENT_DIR / "xtts-v2"
+WAV2LIP_DIR = MODEL_ROOT / "wav2lip"
+SADTALKER_DIR = MODEL_ROOT / "sadtalker"
+GFPGAN_DIR = MODEL_ROOT / "gfpgan"
+FASTER_WHISPER_DIR = MODEL_ROOT / "faster-whisper"
+PIPER_TTS_DIR = MODEL_ROOT / "piper-tts"
+XTTS_DIR = MODEL_ROOT / "xtts-v2"
 
 # Python解释器
 WAV2LIP_PY = WAV2LIP_DIR / "env" / "Scripts" / "python.exe"
