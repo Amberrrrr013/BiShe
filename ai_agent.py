@@ -375,7 +375,7 @@ def get_llm(model_name: str = "glm"):
     else:
         return ChatOpenAI(
             model="glm-4-flash-250414",
-            api_key=API_CONFIG.get("text_api", {}).get("api_key", "6095a09e08af4102a6b9bf2353930edc.lg7e6vBUape5NpS3"),
+            api_key=API_CONFIG.get("text_api", {}).get("api_key") or os.getenv("GLM_API_KEY", ""),
             base_url=API_CONFIG.get("text_api", {}).get("base_url", "https://open.bigmodel.cn/api/paas/v4")
         ).bind_tools(get_all_tools())
 

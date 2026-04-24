@@ -27,17 +27,17 @@ workflow = None
 agent_workflow_instance = None
 current_text_model = None
 
-# 模型配置映射
+# 模型配置映射 - API Key 从环境变量读取
 MODEL_CONFIGS = {
     "glm": {
         "provider": "glm",
-        "api_key": "6095a09e08af4102a6b9bf2353930edc.lg7e6vBUape5NpS3",
+        "api_key": os.getenv("GLM_API_KEY", ""),
         "model": "glm-4-flash-250414",
         "base_url": "https://open.bigmodel.cn/api/paas/v4",
     },
     "minimax": {
         "provider": "minimax",
-        "api_key": "sk-cp-bMNwjtsNaMElOvU4JC9MCGW5X5RvxP6ksQIoTNUb_Pc65R8QCumrPdcEtQl9Dkdr0OKtfWC78g-KhpCPUxuwApMi1e4h9QKhVyCvLiV33H8yajDTxVJrCeM",
+        "api_key": os.getenv("MINIMAX_API_KEY", ""),
         "model": "MiniMax-Text-01",
         "base_url": "https://api.minimax.chat/v1",
     },
@@ -218,20 +218,20 @@ def generate():
             config["image_mode"] = "upload"  # 改为upload模式，让ImageManager处理
         else:
             # 图片库为空，使用默认测试图片
-            default_image = Path(r"D:\_BiShe\demo_1\test_resourse\picture_test.jpg")
+            default_image = PROJECT_ROOT / "test_resourse" / "picture_test.jpg"
             if default_image.exists():
                 config["image_source"] = str(default_image)
             config["image_mode"] = "upload"
     elif image_source and not Path(image_source).exists():
         # 尝试在test_resourse目录下查找
         test_resource_path = (
-            Path(r"D:\_BiShe\demo_1\test_resourse") / Path(image_source).name
+            PROJECT_ROOT / "test_resourse" / Path(image_source).name
         )
         if test_resource_path.exists():
             config["image_source"] = str(test_resource_path)
         else:
             # 使用默认测试图片
-            default_image = Path(r"D:\_BiShe\demo_1\test_resourse\picture_test.jpg")
+            default_image = PROJECT_ROOT / "test_resourse" / "picture_test.jpg"
             if default_image.exists():
                 config["image_source"] = str(default_image)
 
